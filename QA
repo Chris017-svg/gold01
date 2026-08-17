@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="2026 國民年金考前測驗練習，50題附詳解。">
+<title>2026 國民年金考前測驗</title>
+<style>
+:root {
+  --bg:#f5f7fb;
+  --panel:#ffffff;
+  --text:#182033;
+  --muted:#687087;
+  --line:#dfe4ee;
+  --primary:#3157d5;
+  --primary-dark:#2444ad;
+  --ok:#137a4a;
+  --bad:#b42318;
+  --warn:#8a5a00;
+  --shadow:0 10px 30px rgba(31,45,75,.08);
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+button, select { font:inherit; }
+button { cursor:pointer; }
+.container { width:min(940px, calc(100% - 28px)); margin:0 auto; }
+header {
+  background:linear-gradient(135deg,#18264d,#3157d5);
+  color:#fff;
+  padding:34px 0 28px;
+}
+header h1 { margin:0 0 8px; font-size:clamp(28px,5vw,42px); }
+header p { margin:0; opacity:.9; line-height:1.7; }
+.top-note {
+  margin-top:14px;
+  display:inline-block;
+  padding:7px 10px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:10px;
+  background:rgba(255,255,255,.1);
+  font-size:14px;
+}
+main { padding:26px 0 46px; }
+.card {
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:22px;
+  margin-bottom:18px;
+}
+.controls {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  align-items:end;
+}
+.control label {
+  display:block;
+  font-weight:700;
+  margin-bottom:7px;
+  font-size:14px;
+}
+select {
+  width:100%;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#fff;
+  color:var(--text);
+}
+.btn {
+  border:0;
+  border-radius:11px;
+  padding:11px 16px;
+  font-weight:800;
+  background:var(--primary);
+  color:#fff;
+}
+.btn:hover { background:var(--primary-dark); }
+.btn.secondary { background:#eef2ff; color:#263d91; }
+.btn.ghost { background:#fff; color:var(--text); border:1px solid var(--line); }
+.btn:disabled { opacity:.45; cursor:not-allowed; }
+.progress-wrap {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+}
+.progress {
+  flex:1;
+  height:10px;
+  border-radius:999px;
+  background:#e9edf5;
+  overflow:hidden;
+}
+.progress > div {
+  height:100%;
+  background:var(--primary);
+  width:0%;
+  transition:width .25s ease;
+}
+.meta {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:12px;
+}
+.tag {
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#eef2ff;
+  color:#2945a5;
+  font-weight:800;
+  font-size:13px;
+  margin-bottom:10px;
+}
+.question {
+  font-size:clamp(20px,4vw,26px);
+  line-height:1.55;
+  font-weight:850;
+  margin:0 0 18px;
+}
+.options {
+  display:grid;
+  gap:11px;
+}
+.option {
+  width:100%;
+  text-align:left;
+  padding:14px 15px;
+  border-radius:12px;
+  border:1.5px solid var(--line);
+  background:#fff;
+  color:var(--text);
+  line-height:1.55;
+  transition:.15s ease;
+}
+.option:hover:not(:disabled) {
+  border-color:#8aa0ea;
+  transform:translateY(-1px);
+}
+.option .letter {
+  display:inline-grid;
+  place-items:center;
+  width:28px;
+  height:28px;
+  border-radius:8px;
+  margin-right:9px;
+  background:#f0f3f9;
+  font-weight:900;
+}
+.option.correct {
+  border:2px solid var(--ok);
+  background:#effaf5;
+}
+.option.wrong {
+  border:2px solid var(--bad);
+  background:#fff2f1;
+}
+.option.correct::after {
+  content:"  ✓ 正確答案";
+  color:var(--ok);
+  font-weight:900;
+}
+.option.wrong::after {
+  content:"  ✕ 你的答案";
+  color:var(--bad);
+  font-weight:900;
+}
+.explanation {
+  margin-top:18px;
+  border-left:5px solid var(--primary);
+  background:#f8f9ff;
+  border-radius:10px;
+  padding:14px 16px;
+  line-height:1.75;
+}
+.explanation strong { display:block; margin-bottom:4px; }
+.nav {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:18px;
+}
+.result {
+  text-align:center;
+  padding:10px 0;
+}
+.score {
+  font-size:58px;
+  font-weight:950;
+  line-height:1;
+  margin:10px 0;
+}
+.result-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:18px 0;
+}
+.metric {
+  background:#f7f8fc;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px 8px;
+}
+.metric b { font-size:22px; display:block; }
+.review-item {
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px;
+  margin-top:12px;
+  line-height:1.65;
+}
+.review-item h3 { margin:0 0 8px; font-size:17px; }
+.review-item .mine { color:var(--bad); font-weight:800; }
+.review-item .right { color:var(--ok); font-weight:800; }
+.sources {
+  line-height:1.8;
+  color:var(--muted);
+  font-size:14px;
+}
+.sources a { color:var(--primary-dark); overflow-wrap:anywhere; }
+.small { color:var(--muted); font-size:13px; }
+.hidden { display:none !important; }
+kbd {
+  border:1px solid #cad1df;
+  border-bottom-width:2px;
+  background:#fff;
+  border-radius:5px;
+  padding:1px 6px;
+  font-size:12px;
+}
+@media (max-width:700px) {
+  .controls { grid-template-columns:1fr; }
+  .card { padding:17px; border-radius:15px; }
+  .result-grid { grid-template-columns:1fr 1fr 1fr; }
+  .nav { flex-direction:column; }
+  .nav .btn { width:100%; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <h1>2026 國民年金考前測驗</h1>
+    <p>50題選擇題｜作答後立即顯示答案與詳解｜支援錯題重練</p>
+    <div class="top-note">資料基準：2026-08-17　考現行法時，請勿把修法草案當成已生效規定。</div>
+  </div>
+</header>
+
+<main class="container">
+  <section id="setup" class="card">
+    <h2 style="margin-top:0">開始練習</h2>
+    <div class="controls">
+      <div class="control">
+        <label for="count">題數</label>
+        <select id="count">
+          <option value="10">10題快刷</option>
+          <option value="20">20題練習</option>
+          <option value="50" selected>50題完整測驗</option>
+        </select>
+      </div>
+      <div class="control">
+        <label for="order">題目順序</label>
+        <select id="order">
+          <option value="normal">依題庫順序</option>
+          <option value="random">隨機出題</option>
+        </select>
+      </div>
+      <button class="btn" id="startBtn">開始測驗</button>
+    </div>
+    <p class="small" style="margin-bottom:0;margin-top:14px">桌機可用 <kbd>1</kbd>～<kbd>4</kbd> 選答案，<kbd>Enter</kbd> 下一題。</p>
+  </section>
+
+  <section id="quiz" class="card hidden" aria-live="polite">
+    <div class="progress-wrap">
+      <div class="progress" aria-label="作答進度"><div id="bar"></div></div>
+      <b id="progressText">1 / 50</b>
+    </div>
+    <div class="meta">
+      <span id="scoreText">目前答對：0</span>
+      <span id="statusText">請作答</span>
+    </div>
+    <div class="tag" id="tag"></div>
+    <h2 class="question" id="questionText"></h2>
+    <div class="options" id="options"></div>
+    <div id="explanation" class="explanation hidden"></div>
+    <div class="nav">
+      <button class="btn ghost" id="quitBtn">結束本回</button>
+      <button class="btn" id="nextBtn" disabled>下一題</button>
+    </div>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="result">
+      <h2 style="margin-top:0">本回完成</h2>
+      <div class="score" id="finalPercent">0%</div>
+      <div id="finalMessage"></div>
+      <div class="result-grid">
+        <div class="metric"><b id="correctCount">0</b>答對</div>
+        <div class="metric"><b id="wrongCount">0</b>答錯</div>
+        <div class="metric"><b id="totalCount">0</b>總題數</div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn" id="retryWrongBtn">錯題重練</button>
+        <button class="btn secondary" id="restartBtn">重新開始</button>
+      </div>
+    </div>
+    <div id="review"></div>
+  </section>
+
+  <section class="card sources">
+    <h2 style="color:var(--text);margin-top:0">官方資料來源</h2>
+    <p>本題庫依前述已核對的現行國民年金規定整理，並以 2026-08-17 為資料基準。若日後法規或給付金額修正，請再以官方最新公告為準。</p>
+    <ul>
+      <li><a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0050152" target="_blank" rel="noopener">全國法規資料庫－國民年金法</a></li>
+      <li><a href="https://www.bli.gov.tw/0019853.html" target="_blank" rel="noopener">勞保局－國民年金保險費率／月投保金額相關資料</a></li>
+      <li><a href="https://www.bli.gov.tw/0013596.html" target="_blank" rel="noopener">勞保局－國民年金保險費負擔比例</a></li>
+      <li><a href="https://www.bli.gov.tw/0014336.html" target="_blank" rel="noopener">勞保局－老年年金給付計算</a></li>
+      <li><a href="https://dep.mohw.gov.tw/DOSI/cp-317-86447-102.html" target="_blank" rel="noopener">衛福部－2026 老年年金免申請措施</a></li>
+    </ul>
+  </section>
+</main>
+
+<script>
+const QUESTION_BANK = [{"q": "國民年金主要納保年齡為何？", "options": ["18歲～未滿60歲", "20歲～未滿65歲", "25歲～未滿65歲", "30歲～未滿70歲"], "answer": 2, "explanation": "一般國民年金納保對象的重要年齡條件是「年滿25歲、未滿65歲」。另外還要符合在國內設有戶籍，以及未參加勞保、農保、公保或軍保等條件。", "tag": "基本制度"}, {"q": "國民年金的中央主管機關是哪一個？", "options": ["勞動部", "衛生福利部", "財政部", "內政部"], "answer": 1, "explanation": "國民年金的中央主管機關是衛生福利部；實際辦理國民年金保險業務的保險人則是勞動部勞工保險局。這兩者很容易在考題中互換混淆。", "tag": "基本制度"}, {"q": "國民年金保險的「保險人」是誰？", "options": ["衛生福利部", "各直轄市與縣市政府", "勞動部勞工保險局", "中央健康保險署"], "answer": 2, "explanation": "勞動部勞工保險局辦理國民年金保險業務，並為國民年金保險的保險人。主管機關則是衛生福利部。", "tag": "基本制度"}, {"q": "國民年金保險事故共有幾種？", "options": ["3種", "4種", "5種", "6種"], "answer": 1, "explanation": "國民年金的保險事故為老年、生育、身心障礙及死亡，共4種。死亡事故可衍生喪葬給付與遺屬年金，因此保險給付共有5種。", "tag": "基本制度"}, {"q": "國民年金共有幾大保險給付？", "options": ["3種", "4種", "5種", "6種"], "answer": 2, "explanation": "五大保險給付是：老年年金、生育給付、身心障礙年金、喪葬給付、遺屬年金。可記成「老、生、障、葬、遺」。", "tag": "基本制度"}, {"q": "下列何者不是國民年金五大保險給付之一？", "options": ["生育給付", "喪葬給付", "原住民給付", "遺屬年金"], "answer": 2, "explanation": "原住民給付是國民年金制度相關給付，但不屬於五大「保險給付」。五大保險給付為老年、生育、身心障礙、喪葬與遺屬。", "tag": "基本制度"}, {"q": "2026年1月1日起，國民年金月投保金額為多少？", "options": ["18,282元", "19,761元", "21,103元", "22,000元"], "answer": 2, "explanation": "2026年1月1日起，國民年金月投保金額由19,761元調整為21,103元。", "tag": "保費"}, {"q": "2026年現行國民年金保險費率為多少？", "options": ["9.5%", "10%", "10.5%", "12%"], "answer": 2, "explanation": "2026年現行國民年金保險費率為10.5%。12%是法定費率上限，不是目前實際費率。", "tag": "保費"}, {"q": "一般國民年金被保險人自行負擔保險費的比例為多少？", "options": ["40%", "50%", "60%", "70%"], "answer": 2, "explanation": "一般被保險人自行負擔60%，政府負擔40%。", "tag": "保費"}, {"q": "以2026年標準計算，一般國保被保險人每月約自行負擔多少保費？", "options": ["665元", "887元", "1,107元", "1,329元"], "answer": 3, "explanation": "月投保金額21,103元 × 費率10.5% ≈ 每月總保費2,216元；一般被保險人自付60%，約1,329元，政府約負擔887元。", "tag": "保費"}, {"q": "低收入戶參加國民年金時，本人保險費負擔比例為多少？", "options": ["0%", "10%", "30%", "40%"], "answer": 0, "explanation": "低收入戶的國保保險費由政府全額負擔，因此本人負擔0%。", "tag": "保費補助"}, {"q": "中低收入戶參加國民年金時，本人保險費負擔比例為多少？", "options": ["0%", "30%", "45%", "60%"], "answer": 1, "explanation": "中低收入戶本人負擔30%，政府負擔70%。以2026年標準，本人約665元、政府約1,551元。", "tag": "保費補助"}, {"q": "中度身心障礙者參加國民年金時，本人保險費負擔比例為多少？", "options": ["0%", "30%", "45%", "60%"], "answer": 1, "explanation": "中度身心障礙者本人負擔30%，政府負擔70%。", "tag": "保費補助"}, {"q": "輕度身心障礙者參加國民年金時，本人保險費負擔比例為多少？", "options": ["0%", "30%", "45%", "60%"], "answer": 2, "explanation": "輕度身心障礙者本人負擔45%，政府負擔55%。", "tag": "保費補助"}, {"q": "重度或極重度身心障礙者參加國民年金時，本人保險費負擔比例為多少？", "options": ["0%", "30%", "45%", "60%"], "answer": 0, "explanation": "重度及極重度身心障礙者本人負擔0%，保險費由政府全額負擔。可一起記「重0、中30、輕45、一般60」。", "tag": "保費補助"}, {"q": "國民年金老年年金的請領年齡為何？", "options": ["55歲", "60歲", "63歲", "65歲"], "answer": 3, "explanation": "曾參加國民年金並具有有效年資者，年滿65歲時可依規定請領國民年金老年年金。", "tag": "老年年金"}, {"q": "國民年金老年年金 A 式公式中的年資乘數為何？", "options": ["0.65%", "1%", "1.3%", "1.55%"], "answer": 0, "explanation": "A式為「月投保金額 × 國保年資 × 0.65% ＋ 加計金額」。目前加計金額為4,049元。", "tag": "老年年金"}, {"q": "國民年金老年年金 B 式的正確公式為何？", "options": ["月投保金額 × 年資 × 0.65%", "月投保金額 × 年資 × 1.3%", "月投保金額 × 年資 × 1.55%", "月投保金額 × 2"], "answer": 1, "explanation": "B式為「月投保金額 × 國保年資 × 1.3%」。B式沒有再加固定金額。", "tag": "老年年金"}, {"q": "截至2026年8月17日，老年年金 A 式的現行加計金額為多少？", "options": ["3,000元", "3,772元", "4,049元", "5,000元"], "answer": 2, "explanation": "現行A式加計金額為4,049元。5,000元屬2026年修法草案相關數字，不能當成已生效現行法。", "tag": "老年年金"}, {"q": "以2026年月投保金額21,103元、國保年資15年計算，A式每月約可領多少？", "options": ["4,049元", "4,115元", "6,107元", "7,058元"], "answer": 2, "explanation": "21,103 × 15 × 0.65% ＋ 4,049 ≈ 6,107元。因此此題答案約為6,107元。", "tag": "老年年金"}, {"q": "以2026年月投保金額21,103元、國保年資15年計算，B式每月約可領多少？", "options": ["4,115元", "5,437元", "6,107元", "7,058元"], "answer": 0, "explanation": "21,103 × 15 × 1.3% ≈ 4,115元。若同時符合A式資格，則會依規定擇優計給。", "tag": "老年年金"}, {"q": "以2026年月投保金額計算，國民年金生育給付「本體」為多少？", "options": ["21,103元", "42,206元", "57,794元", "100,000元"], "answer": 1, "explanation": "國民年金生育給付本體為月投保金額的2個月：21,103 × 2＝42,206元。", "tag": "生育給付"}, {"q": "2026年國民年金生育給付加上生育補助後，每胎合計可達多少？", "options": ["42,206元", "50,000元", "57,794元", "100,000元"], "answer": 3, "explanation": "2026年國保生育給付42,206元，加上生育補助57,794元，每胎合計補足至100,000元。", "tag": "生育給付"}, {"q": "符合2026年生育給付與補助規定，生雙胞胎合計可達多少？", "options": ["100,000元", "150,000元", "200,000元", "300,000元"], "answer": 2, "explanation": "2026年每胎合計補足10萬元；雙胞胎依胎數比例為20萬元。", "tag": "生育給付"}, {"q": "國民年金喪葬給付按死亡當月月投保金額的幾個月發給？", "options": ["2個月", "3個月", "5個月", "6個月"], "answer": 2, "explanation": "喪葬給付為死亡當月月投保金額的5個月。可記「生2、葬5」。", "tag": "死亡給付"}, {"q": "以2026年月投保金額21,103元計算，國民年金喪葬給付為多少？", "options": ["42,206元", "81,030元", "100,000元", "105,515元"], "answer": 3, "explanation": "21,103 × 5＝105,515元，為一次發給。", "tag": "死亡給付"}, {"q": "國民年金身心障礙年金的基本計算乘數為何？", "options": ["0.65%", "1.3%", "1.55%", "2%"], "answer": 1, "explanation": "身心障礙年金基本公式為「月投保金額 × 國保年資 × 1.3%」。", "tag": "身障年金"}, {"q": "截至2026年8月17日，符合基本保障條件的身心障礙年金最低保障金額為多少？", "options": ["4,049元", "5,000元", "5,437元", "6,715元"], "answer": 2, "explanation": "現行基本保障金額為5,437元。6,715元是2026年修法草案相關數字，尚不是現行標準。", "tag": "身障年金"}, {"q": "截至2026年8月17日，符合基本保障規定的遺屬年金最低保障金額為多少？", "options": ["3,000元", "4,049元", "5,000元", "5,437元"], "answer": 1, "explanation": "現行遺屬年金基本保障金額為4,049元。5,000元屬修法草案相關數字。", "tag": "遺屬年金"}, {"q": "國民年金遺屬年金的第一順位遺屬為何？", "options": ["父母", "配偶及子女", "祖父母", "兄弟姊妹"], "answer": 1, "explanation": "第一順位為配偶及子女；其後依序為父母、祖父母、孫子女、兄弟姊妹。", "tag": "遺屬年金"}, {"q": "同一順位符合遺屬年金資格者有2人時，原給付金額加發多少？", "options": ["10%", "20%", "25%", "50%"], "answer": 2, "explanation": "同順位有2人符合資格時加發25%。", "tag": "遺屬年金"}, {"q": "同一順位符合遺屬年金資格者有3人以上時，最多加發多少？", "options": ["25%", "40%", "50%", "100%"], "answer": 2, "explanation": "每多1名符合資格遺屬加發25%，但最多加發50%；因此3人以上即達上限。", "tag": "遺屬年金"}, {"q": "國民年金保險給付請求權一般為多久？", "options": ["2年", "5年", "10年", "15年"], "answer": 1, "explanation": "國民年金保險給付請求權原則為5年，自得請領之日起5年間不行使而消滅。", "tag": "時效"}, {"q": "國民年金欠繳保險費原則上可在多久內補繳？", "options": ["2年", "5年", "10年", "20年"], "answer": 2, "explanation": "欠繳保費原則上可在10年內補繳；超過10年的欠費不能再補繳，也不能計入保險年資。", "tag": "時效"}, {"q": "國民年金常考的「請求權與欠費補繳」正確記法為何？", "options": ["欠5年、給10年", "欠10年、給5年", "兩者都是5年", "兩者都是10年"], "answer": 1, "explanation": "最重要口訣是「欠10、給5」：欠費補繳原則10年內；保險給付請求權原則5年。", "tag": "時效"}, {"q": "符合國民年金原住民給付資格者，最早從幾歲開始請領？", "options": ["50歲", "55歲", "60歲", "65歲"], "answer": 1, "explanation": "符合相關資格的原住民，自年滿55歲起可依規定領取原住民給付。", "tag": "原住民給付"}, {"q": "原住民給付原則上可領到何時？", "options": ["年滿60歲當月", "年滿63歲當月", "年滿65歲前一個月", "終身"], "answer": 2, "explanation": "原住民給付的年齡範圍為年滿55歲至未滿65歲，因此原則領到年滿65歲前一個月。", "tag": "原住民給付"}, {"q": "截至2026年8月17日，原住民給付每月金額為多少？", "options": ["3,000元", "4,049元", "5,000元", "5,437元"], "answer": 1, "explanation": "現行原住民給付為每月4,049元。", "tag": "原住民給付"}, {"q": "截至2026年8月17日，老年基本保證年金每月金額為多少？", "options": ["4,049元", "5,000元", "5,437元", "6,715元"], "answer": 0, "explanation": "現行老年基本保證年金為每月4,049元。其主要對象是國民年金2008年10月1日開辦時已年滿65歲，且符合相關資格者。", "tag": "基本保證"}, {"q": "現行老年基本保證年金、原住民給付等相關排富條件中，個人綜合所得總額門檻為多少？", "options": ["40萬元", "50萬元", "60萬元", "100萬元"], "answer": 1, "explanation": "現行相關排富條件之一是個人綜合所得稅各類所得總額合計達50萬元以上。60萬元是2026年修法草案相關數字。", "tag": "排富"}, {"q": "現行老年基本保證年金、原住民給付等相關排富條件中，土地及房屋價值合計門檻為多少？", "options": ["400萬元", "500萬元", "800萬元", "1,025萬元"], "answer": 1, "explanation": "現行土地及房屋價值合計門檻為500萬元。1,025萬元是2026年修法草案相關數字。", "tag": "排富"}, {"q": "符合規定的唯一自住房屋且實際居住時，計算房地價值可扣除的最高額度為多少？", "options": ["100萬元", "200萬元", "400萬元", "500萬元"], "answer": 2, "explanation": "符合唯一自住房屋且實際居住等規定時，可依規定扣除最高400萬元。", "tag": "排富"}, {"q": "2026年5月19日起，符合免申請條件的65歲國保民眾，其老年年金如何辦理？", "options": ["仍一律須本人書面申請", "可由勞保局主動審核並依條件主動發給", "須先由縣市政府核准", "改為70歲才能領"], "answer": 1, "explanation": "2026年5月19日起，勞保局對年滿65歲、無欠保費等符合條件者主動審核；符合資格且已有國內金融帳戶資料者，可免提出申請由勞保局主動發給。", "tag": "2026新制"}, {"q": "下列哪一種國民年金給付目前仍須依規定由民眾提出申請？", "options": ["符合免申請條件的老年年金", "身心障礙年金", "所有給付都完全自動", "所有給付都不需檢附資料"], "answer": 1, "explanation": "2026年的免申請措施主要針對符合條件的老年年金；身心障礙、遺屬、生育、喪葬等給付仍須依規定提出申請及相關證明。", "tag": "2026新制"}, {"q": "對勞保局國民年金核定不服，原則上應於收到核定通知翌日起幾日內申請審議？", "options": ["30日", "60日", "90日", "1年"], "answer": 1, "explanation": "對國民年金保險權益核定不服者，原則應自收到核定通知文件翌日起60日內申請審議。", "tag": "行政救濟"}, {"q": "截至2026年8月17日，國民年金被保險人之配偶連帶繳納保險費義務是否仍存在？", "options": ["已全面取消", "現行法仍存在", "僅低收入戶存在", "僅65歲以上存在"], "answer": 1, "explanation": "截至2026年8月17日，現行法仍有被保險人與配偶間連帶繳納保費的規定。2026年有修法草案研議刪除，但尚不能視為現行法已取消。", "tag": "現行法與草案"}, {"q": "依現行規定，配偶經依法限期繳納仍無正當理由未繳時，相關罰鍰範圍為何？", "options": ["1,000～5,000元", "3,000～15,000元", "5,000～30,000元", "10,000～50,000元"], "answer": 1, "explanation": "符合現行罰則要件時，罰鍰為3,000元以上、15,000元以下。並不是一發生欠費就立即處罰，仍須符合相關法定程序與要件。", "tag": "現行法與草案"}, {"q": "國民年金保險基金的最後支付責任由誰負擔？", "options": ["被保險人個人", "勞保局承辦人員", "政府", "往來銀行"], "answer": 2, "explanation": "國民年金保險基金由政府負最後支付責任，這也是社會保險制度的重要保障設計。", "tag": "基本制度"}, {"q": "「截至2026年8月17日，國民年金遺屬年金最低保障已正式提高為5,000元。」此敘述是否正確？", "options": ["正確，已全面生效", "錯誤，現行仍為4,049元", "正確，但僅65歲以上適用", "正確，但僅低收入戶適用"], "answer": 1, "explanation": "此敘述錯誤。現行遺屬年金基本保障仍為4,049元；5,000元是2026年修法草案相關數字。", "tag": "現行法與草案"}, {"q": "「行政院已通過把部分國民年金給付提高到5,000元的修正草案，所以現行法考題應直接選5,000元。」此敘述是否正確？", "options": ["正確，行政院通過即等於法律生效", "錯誤，修正草案不等於現行法已修正生效", "正確，但僅適用老年年金", "正確，但僅適用原住民給付"], "answer": 1, "explanation": "此敘述錯誤。修正草案通過行政院並不等於法律已完成修法並生效。考「現行法」時仍應依已生效法規與現行給付標準作答。", "tag": "現行法與草案"}];
+
+let activeQuestions = [];
+let index = 0;
+let score = 0;
+let answers = [];
+let answered = false;
+
+const $ = (id) => document.getElementById(id);
+const letters = ["A","B","C","D"];
+
+function shuffle(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function startQuiz(customQuestions = null) {
+  const count = Number($("count").value);
+  const order = $("order").value;
+
+  if (customQuestions) {
+    activeQuestions = [...customQuestions];
+  } else {
+    let pool = order === "random" ? shuffle(QUESTION_BANK) : [...QUESTION_BANK];
+    activeQuestions = pool.slice(0, count);
+  }
+
+  index = 0;
+  score = 0;
+  answers = [];
+  answered = false;
+  $("setup").classList.add("hidden");
+  $("result").classList.add("hidden");
+  $("quiz").classList.remove("hidden");
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const item = activeQuestions[index];
+  answered = false;
+  $("nextBtn").disabled = true;
+  $("nextBtn").textContent = index === activeQuestions.length - 1 ? "看成績" : "下一題";
+  $("explanation").classList.add("hidden");
+  $("explanation").innerHTML = "";
+
+  $("progressText").textContent = `${index + 1} / ${activeQuestions.length}`;
+  $("bar").style.width = `${((index + 1) / activeQuestions.length) * 100}%`;
+  $("scoreText").textContent = `目前答對：${score}`;
+  $("statusText").textContent = "請作答";
+  $("tag").textContent = item.tag;
+  $("questionText").textContent = item.q;
+
+  const box = $("options");
+  box.innerHTML = "";
+  item.options.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.className = "option";
+    btn.innerHTML = `<span class="letter">${letters[i]}</span>${opt}`;
+    btn.addEventListener("click", () => choose(i));
+    box.appendChild(btn);
+  });
+}
+
+function choose(choice) {
+  if (answered) return;
+  answered = true;
+
+  const item = activeQuestions[index];
+  const isCorrect = choice === item.answer;
+  if (isCorrect) score++;
+
+  answers.push({
+    question: item,
+    choice,
+    correct: isCorrect
+  });
+
+  [...$("options").children].forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === item.answer) btn.classList.add("correct");
+    if (i === choice && i !== item.answer) btn.classList.add("wrong");
+  });
+
+  $("scoreText").textContent = `目前答對：${score}`;
+  $("statusText").textContent = isCorrect ? "✓ 答對" : "✕ 答錯";
+  $("explanation").innerHTML = `<strong>${isCorrect ? "答對了" : "正確答案：" + letters[item.answer] + "．" + item.options[item.answer]}</strong>${item.explanation}`;
+  $("explanation").classList.remove("hidden");
+  $("nextBtn").disabled = false;
+}
+
+function nextQuestion() {
+  if (!answered) return;
+  if (index < activeQuestions.length - 1) {
+    index++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+function finishQuiz() {
+  $("quiz").classList.add("hidden");
+  $("result").classList.remove("hidden");
+
+  const total = activeQuestions.length;
+  const pct = Math.round((score / total) * 100);
+  const wrong = total - score;
+
+  $("finalPercent").textContent = `${pct}%`;
+  $("correctCount").textContent = score;
+  $("wrongCount").textContent = wrong;
+  $("totalCount").textContent = total;
+
+  let message = "建議先看錯題詳解，再重刷一次。";
+  if (pct >= 90) message = "掌握度很高，可以再用隨機模式確認穩定度。";
+  else if (pct >= 75) message = "基礎已經不錯，優先補強錯題與容易混淆的數字。";
+  else if (pct >= 60) message = "有基本概念，但還有幾組常考數字需要再記熟。";
+  $("finalMessage").textContent = message;
+
+  const wrongAnswers = answers.filter(a => !a.correct);
+  localStorage.setItem("nhiWrongQuestions2026", JSON.stringify(wrongAnswers.map(a => QUESTION_BANK.indexOf(a.question))));
+
+  $("retryWrongBtn").disabled = wrongAnswers.length === 0;
+  $("retryWrongBtn").textContent = wrongAnswers.length ? `錯題重練（${wrongAnswers.length}題）` : "本回全對";
+
+  const review = $("review");
+  review.innerHTML = wrongAnswers.length ? "<h2>錯題詳解</h2>" : "<h2>這一回沒有錯題</h2>";
+
+  wrongAnswers.forEach((a, i) => {
+    const item = a.question;
+    const div = document.createElement("div");
+    div.className = "review-item";
+    div.innerHTML = `
+      <h3>${i + 1}. ${item.q}</h3>
+      <div class="mine">你的答案：${letters[a.choice]}．${item.options[a.choice]}</div>
+      <div class="right">正確答案：${letters[item.answer]}．${item.options[item.answer]}</div>
+      <div style="margin-top:7px">${item.explanation}</div>
+    `;
+    review.appendChild(div);
+  });
+
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function restart() {
+  $("result").classList.add("hidden");
+  $("quiz").classList.add("hidden");
+  $("setup").classList.remove("hidden");
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+$("startBtn").addEventListener("click", () => startQuiz());
+$("nextBtn").addEventListener("click", nextQuestion);
+$("quitBtn").addEventListener("click", finishQuiz);
+$("restartBtn").addEventListener("click", restart);
+$("retryWrongBtn").addEventListener("click", () => {
+  const wrongQuestions = answers.filter(a => !a.correct).map(a => a.question);
+  if (wrongQuestions.length) startQuiz(wrongQuestions);
+});
+
+document.addEventListener("keydown", (e) => {
+  if ($("quiz").classList.contains("hidden")) return;
+  if (!answered && ["1","2","3","4"].includes(e.key)) {
+    choose(Number(e.key) - 1);
+  } else if (answered && e.key === "Enter") {
+    nextQuestion();
+  }
+});
+</script>
+</body>
+</html>
