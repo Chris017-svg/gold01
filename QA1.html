@@ -490,9 +490,38 @@ kbd {
     padding-bottom: max(30px, env(safe-area-inset-bottom));
   }
 }
+
+/* ===== 題庫網站共用導覽列 ===== */
+.site-nav{
+  position:sticky; top:0; z-index:9999;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid #dce3ee;
+  box-shadow:0 3px 12px rgba(25,39,70,.05);
+}
+.site-nav-inner{
+  width:min(960px,calc(100% - 20px)); margin:auto;
+  display:flex; gap:7px; padding:8px 0;
+  overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+}
+.site-nav-inner::-webkit-scrollbar{display:none}
+.site-nav a{
+  flex:0 0 auto; text-decoration:none; color:#26324b;
+  font-weight:800; font-size:13px; line-height:1;
+  padding:10px 12px; border:1px solid #dce3ee;
+  background:#fff; border-radius:999px; white-space:nowrap;
+}
+.site-nav a:hover{border-color:#8ba0e8;background:#f4f6ff}
+.site-nav a.active{background:#3157d5;color:#fff;border-color:#3157d5}
+@media(max-width:480px){
+  .site-nav-inner{width:calc(100% - 12px);padding:7px 0}
+  .site-nav a{font-size:12px;padding:9px 10px}
+}
+
 </style>
 </head>
 <body>
+<nav class="site-nav"><div class="site-nav-inner"><a href="index.html" class="">🏠 首頁</a><a href="QA.html" class="active">📘 基礎</a><a href="QA2.html" class="">🧠 進階</a><a href="QA3.html" class="">✍️ 問答</a><a href="QA4.html" class="">👑 魔王</a></div></nav>
 <header>
   <div class="container">
     <h1>2026 國民年金考前測驗</h1>
