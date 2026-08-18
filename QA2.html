@@ -15,8 +15,37 @@ main{padding:22px 0 45px}.card{background:var(--card);border:1px solid var(--lin
 @media(max-width:768px){.wrap{width:min(100% - 18px,960px)}header{padding:23px 0 19px}.card{padding:15px;border-radius:14px}.grid{grid-template-columns:1fr}.btn,select,input{min-height:48px;font-size:16px}.q{font-size:21px}.opt{font-size:16px;min-height:58px;padding:13px 11px;touch-action:manipulation}.nav{flex-direction:column-reverse}.nav .btn{width:100%}.row{flex-wrap:wrap}.explain{font-size:15px}.metrics{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:480px){.wrap{width:calc(100% - 12px)}header h1{font-size:26px}.card{padding:12px;border-radius:12px}.q{font-size:19px}.opt{font-size:15px}.metrics{grid-template-columns:1fr}.metric{display:flex;justify-content:space-between;align-items:center}.metric b{display:inline}.score{font-size:46px}.badge{font-size:12px}}
 @supports(padding:max(0px)){body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}header{padding-top:max(23px,env(safe-area-inset-top))}main{padding-bottom:max(40px,env(safe-area-inset-bottom))}}
+
+/* ===== 題庫網站共用導覽列 ===== */
+.site-nav{
+  position:sticky; top:0; z-index:9999;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid #dce3ee;
+  box-shadow:0 3px 12px rgba(25,39,70,.05);
+}
+.site-nav-inner{
+  width:min(960px,calc(100% - 20px)); margin:auto;
+  display:flex; gap:7px; padding:8px 0;
+  overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+}
+.site-nav-inner::-webkit-scrollbar{display:none}
+.site-nav a{
+  flex:0 0 auto; text-decoration:none; color:#26324b;
+  font-weight:800; font-size:13px; line-height:1;
+  padding:10px 12px; border:1px solid #dce3ee;
+  background:#fff; border-radius:999px; white-space:nowrap;
+}
+.site-nav a:hover{border-color:#8ba0e8;background:#f4f6ff}
+.site-nav a.active{background:#3157d5;color:#fff;border-color:#3157d5}
+@media(max-width:480px){
+  .site-nav-inner{width:calc(100% - 12px);padding:7px 0}
+  .site-nav a{font-size:12px;padding:9px 10px}
+}
+
 </style></head>
 <body>
+<nav class="site-nav"><div class="site-nav-inner"><a href="index.html" class="">🏠 首頁</a><a href="QA.html" class="">📘 基礎</a><a href="QA2.html" class="active">🧠 進階</a><a href="QA3.html" class="">✍️ 問答</a><a href="QA4.html" class="">👑 魔王</a></div></nav>
 <header><div class="wrap"><h1>QA2｜國民年金特殊題型</h1><p>50題進階選擇題＋陷阱詳解｜A/B式例外、第7條特例、原住民、生育、身障、喪葬、遺屬</p><span class="badge">資料核對基準：2026-08-18｜現行法規＋官方現行給付標準</span></div></header>
 <main class="wrap">
 <section class="card"><div class="notice"><b>這頁專攻容易被騙的題目。</b> 第7條第2、3款屬歷史過渡規定；法條本文中的3,000／4,000元是法定基準數，實際考2026現行給付時，要搭配CPI調整後的4,049／5,437元等標準。修法草案也不能直接當成已生效現行法。</div></section>
